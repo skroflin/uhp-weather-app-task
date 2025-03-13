@@ -1,29 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
 import { ScrollView, StyleSheet } from "react-native";
-import { TextInput, ActivityIndicator } from "react-native-paper";
+import { ActivityIndicator } from "react-native-paper";
 import { useWeather } from "../store/WeatherContext";
 import WeatherCard from "../components/WeatherCard";
 import ForecastList from "../components/ForecastList";
+import CitySearchInput from "../components/CitySearchInput";
 
 const WeatherScreen = () => {
-  const [cityInput, setCityInput] = useState("");
   const { loading, fetchWeather } = useWeather();
 
-  const handleSearch = () => {
-    if (cityInput.trim()) {
-      fetchWeather(cityInput.trim());
-    }
+  const handleCitySelect = (city: string) => {
+    fetchWeather(city);
   };
 
   return (
     <ScrollView style={styles.container}>
-      <TextInput
-        value={cityInput}
-        onChangeText={setCityInput}
-        placeholder="Enter city name"
-        onSubmitEditing={handleSearch}
-        style={styles.input}
-      />
+      <CitySearchInput onCitySelect={handleCitySelect} />
 
       {loading ? (
         <ActivityIndicator size="large" />
@@ -41,9 +33,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-  },
-  input: {
-    marginBottom: 16,
   },
 });
 

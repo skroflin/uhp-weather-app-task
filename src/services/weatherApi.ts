@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_KEY = 'API_KEY';
+const API_KEY = 'API KEY';
 const BASE_URL = 'https://api.openweathermap.org/data/2.5';
 
 export const weatherApi = {
@@ -11,7 +11,10 @@ export const weatherApi = {
             );
             return response.data;
         } catch (error) {
-            throw error;
+            if (axios.isAxiosError(error)) {
+                throw new Error(`Failed to fetch weather data: ${error.response?.data.message || error.message}`);
+            }
+            throw new Error('An unexpected error occurred while fetching weather data');
         }
     },
 
@@ -22,7 +25,10 @@ export const weatherApi = {
             );
             return response.data;
         } catch (error) {
-            throw error;
+            if (axios.isAxiosError(error)) {
+                throw new Error(`Failed to fetch forecast data: ${error.response?.data.message || error.message}`);
+            }
+            throw new Error('An unexpected error occurred while fetching forecast data');
         }
     }
 };
