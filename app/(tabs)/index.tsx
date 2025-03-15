@@ -3,19 +3,18 @@ import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedView } from "@/components/ThemedView";
 import WeatherCard from "@/src/components/WeatherCard";
 import ForecastList from "@/src/components/ForecastList";
-import { IconButton, TextInput } from "react-native-paper";
-import { useState } from "react";
+import { IconButton } from "react-native-paper";
 import { useWeather } from "@/src/store/WeatherContext";
 import { useThemeToggle } from "@/src/store/ThemeContext";
+import CitySearchInput from "@/src/components/CitySearchInput";
 
 export default function HomeScreen() {
-  const [cityInput, setCityInput] = useState("");
   const { fetchWeather } = useWeather();
   const { toggleTheme, isDarkMode } = useThemeToggle();
 
-  const handleSearch = () => {
-    if (cityInput.trim()) {
-      fetchWeather(cityInput.trim());
+  const handleCitySelect = (city: string) => {
+    if (city.trim()) {
+      fetchWeather(city.trim());
     }
   };
 
@@ -40,13 +39,7 @@ export default function HomeScreen() {
       }
     >
       <ThemedView style={styles.container}>
-        <TextInput
-          value={cityInput}
-          onChangeText={setCityInput}
-          placeholder="Enter city name"
-          onSubmitEditing={handleSearch}
-          style={styles.input}
-        />
+        <CitySearchInput onCitySelect={handleCitySelect} />
         <WeatherCard />
         <ForecastList />
       </ThemedView>
@@ -59,9 +52,6 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
     gap: 16,
-  },
-  input: {
-    marginBottom: 16,
   },
   headerImage: {
     height: "100%",

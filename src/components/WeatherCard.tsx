@@ -24,14 +24,10 @@ const WeatherCard = () => {
           {weather.weather[0].description}
         </Paragraph>
         <View style={styles.details}>
+          <Paragraph>Humidity: {weather.main.humidity}%</Paragraph>
+          <Paragraph>Wind: {weather.wind.speed} m/s</Paragraph>
           <Paragraph>
-            <strong>Humidity:</strong> {weather.main.humidity}%
-          </Paragraph>
-          <Paragraph>
-            <strong>Wind:</strong> {weather.wind.speed} m/s
-          </Paragraph>
-          <Paragraph>
-            <strong>Feels like: </strong>
+            Feels like:
             {Math.round(weather.main.feels_like)}°C
           </Paragraph>
         </View>
