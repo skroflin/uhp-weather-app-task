@@ -22,11 +22,8 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   const deviceTheme = useNativeColorScheme();
   const [isDarkMode, setIsDarkMode] = useState(deviceTheme === "dark");
-
-  // Get the actual theme object based on isDarkMode
   const theme = isDarkMode ? darkTheme : lightTheme;
 
-  // Update isDarkMode when device theme changes
   useEffect(() => {
     setIsDarkMode(deviceTheme === "dark");
   }, [deviceTheme]);

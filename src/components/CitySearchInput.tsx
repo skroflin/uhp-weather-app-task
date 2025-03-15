@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   ScrollView,
-  LayoutChangeEvent, // Import this type
+  LayoutChangeEvent,
 } from "react-native";
 import { TextInput, Text } from "react-native-paper";
 import { useThemeToggle } from "@/src/store/ThemeContext";
@@ -27,7 +27,7 @@ const CitySearchInput: React.FC<CitySearchInputProps> = ({ onCitySelect }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [noResults, setNoResults] = useState(false);
   const [inputHeight, setInputHeight] = useState(0);
-  const API_KEY = '';
+  const API_KEY = 'add your API key';
   const { isDarkMode, theme } = useThemeToggle();
 
   const renderRightIcon = () => {
@@ -98,7 +98,6 @@ const CitySearchInput: React.FC<CitySearchInputProps> = ({ onCitySelect }) => {
     return () => clearTimeout(timeoutId);
   }, [query]);
 
-  // Add proper type annotation for the event parameter
   const onInputLayout = (event: LayoutChangeEvent) => {
     const { height } = event.nativeEvent.layout;
     setInputHeight(height);
@@ -138,7 +137,7 @@ const CitySearchInput: React.FC<CitySearchInputProps> = ({ onCitySelect }) => {
             {
               backgroundColor: isDarkMode ? theme.colors.surface : "white",
               borderColor: isDarkMode ? theme.colors.outline : "#eee",
-              top: inputHeight + 110, // Position below the input (title + input height)
+              top: inputHeight + 110,
             },
           ]}
         >
