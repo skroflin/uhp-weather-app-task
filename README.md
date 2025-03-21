@@ -9,7 +9,7 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
    ```bash
    npm install
    ```
-2. Update the `weatherApi.ts` file and `CitySearchInput.tsx` component:
+2. Update the `weatherApi.ts` file and `CitySearchInput.tsx` component
 
    ```
    const API_KEY = 'add your API key';
